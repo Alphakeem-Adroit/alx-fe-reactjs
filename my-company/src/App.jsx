@@ -43,6 +43,7 @@ import Home from './components/Home.jsx';
 import About from './components/About.jsx';
 import Contact from './components/Contact.jsx';
 import Services from './components/Services.jsx';
+import Footer from './components/Footer.jsx';
 
 function App() {
   return (
@@ -55,6 +56,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services />} />
       </Routes>
+
+      <Footer />
     </BrowserRouter>
   );
 }
