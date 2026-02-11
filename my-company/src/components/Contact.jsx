@@ -1,12 +1,52 @@
+import { useState } from 'react';
 
-function Contact() {
-    return (
-        <div>
-            <h1>Contact</h1>
+   function Contact() {
+     const [formData, setFormData] = useState({
+       name: '',
+       email: '',
+       message: ''
+     });
 
-            <p>+2349033023139 | admin@alphakeemadroit.com.ng</p>
-        </div>
-    );
-}
+     const handleChange = (e) => {
+       setFormData({ ...formData, [e.target.name]: e.target.value });
+     };
 
-export default Contact;
+     const handleSubmit = (e) => {
+       e.preventDefault();
+       alert('Form submitted!');
+     };
+
+     return (
+       <div style={{ padding: '20px' }}>
+         <h1>Contact Us</h1>
+         <form onSubmit={handleSubmit}>
+           <input
+             type="text"
+             name="name"
+             placeholder="Your Name"
+             value={formData.name}
+             onChange={handleChange}
+             style={{ display: 'block', margin: '10px 0' }}
+           />
+           <input
+             type="email"
+             name="email"
+             placeholder="Your Email"
+             value={formData.email}
+             onChange={handleChange}
+             style={{ display: 'block', margin: '10px 0' }}
+           />
+           <textarea
+             name="message"
+             placeholder="Your Message"
+             value={formData.message}
+             onChange={handleChange}
+             style={{ display: 'block', margin: '10px 0' }}
+           />
+           <button type="submit">Send Message</button>
+         </form>
+       </div>
+     );
+   }
+
+   export default Contact;

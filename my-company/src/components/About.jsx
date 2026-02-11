@@ -1,12 +1,10 @@
-
 function About() {
-    return (
-        <div>
-            <h1>About Us</h1>
+     return (
+       <div style={{ padding: '20px' }}>
+         <h1>About Us</h1>
+         <p>Our company has been providing top-notch services since 1990. We specialize in various fields including technology, marketing, and consultancy.</p>
+       </div>
+     );
+   }
 
-            <p>These are few details about my company...</p>
-        </div>
-    );
-}
-
-export default About;
+   export default About;

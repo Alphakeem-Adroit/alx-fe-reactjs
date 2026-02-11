@@ -1,20 +1,14 @@
-
 function Services() {
-    return (
-        <div>
-            <h1>Services</h1>
+     return (
+       <div style={{ padding: '20px' }}>
+         <h1>Our Services</h1>
+         <ul>
+           <li>Technology Consulting</li>
+           <li>Market Analysis</li>
+           <li>Product Development</li>
+         </ul>
+       </div>
+     );
+   }
 
-            <div>
-                <p>These are the services we offer:</p>
-
-                <ul>
-                    <li>Web and App Development</li>
-                    <li>Graphic Design and Video Editing</li>
-                    <li>Data Science and Analytics</li>
-                </ul>
-            </div>
-        </div>
-    );
-}
-
-export default Services;
+   export default Services;
