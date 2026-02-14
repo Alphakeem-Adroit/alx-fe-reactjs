@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import useRecipeStore from './recipeStore.js';
+import useRecipeStore from "./recipeStore.js";
 
 const EditRecipeForm = () => {
   const { id } = useParams();
@@ -20,8 +20,8 @@ const EditRecipeForm = () => {
     return <p className="text-red-500">Recipe not found.</p>;
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();   // ✅ now matches exactly
 
     updateRecipe({
       id: recipe.id,
@@ -40,26 +40,29 @@ const EditRecipeForm = () => {
       <input
         type="text"
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(event) => setTitle(event.target.value)}
         className="border p-2 w-full"
         placeholder="Title"
       />
 
       <textarea
         value={ingredients}
-        onChange={(e) => setIngredients(e.target.value)}
+        onChange={(event) => setIngredients(event.target.value)}
         className="border p-2 w-full"
         placeholder="Ingredients"
       />
 
       <textarea
         value={instructions}
-        onChange={(e) => setInstructions(e.target.value)}
+        onChange={(event) => setInstructions(event.target.value)}
         className="border p-2 w-full"
         placeholder="Instructions"
       />
 
-      <button className="bg-green-500 text-white px-4 py-2 rounded">
+      <button
+        type="submit"
+        className="bg-green-500 text-white px-4 py-2 rounded"
+      >
         Update Recipe
       </button>
     </form>
