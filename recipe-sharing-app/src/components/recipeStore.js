@@ -24,11 +24,33 @@ const useRecipeStore = create((set, get) => ({
     })),
 
   toggleFavorite: (recipeId) =>
-    set((state) => ({
-      favorites: state.favorites.includes(recipeId)
-        ? state.favorites.filter((id) => id !== recipeId)
-        : [...state.favorites, recipeId],
-    })),
+  set((state) => {
+    const updatedFavorites = state.favorites.includes(recipeId)
+      ? state.favorites.filter((id) => id !== recipeId)
+      : [...state.favorites, recipeId];
+
+    const favoriteRecipes = state.recipes.filter((recipe) =>
+      updatedFavorites.includes(recipe.id)
+    );
+
+    const keywords = favoriteRecipes.flatMap((recipe) =>
+      recipe.title.toLowerCase().split(" ")
+    );
+
+    const recommended = state.recipes.filter(
+      (recipe) =>
+        !updatedFavorites.includes(recipe.id) &&
+        keywords.some((word) =>
+          recipe.title.toLowerCase().includes(word)
+        )
+    );
+
+    return {
+      favorites: updatedFavorites,
+      recommendations: recommended,
+    };
+  }),
+
 
   // =========================
   // RECOMMENDATIONS

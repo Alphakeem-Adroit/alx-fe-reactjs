@@ -1,42 +1,42 @@
-import { Link } from "react-router-dom";
 import useRecipeStore from "./recipeStore";
-import SearchBar from "./SearchBar";
+import { Link } from "react-router-dom";
 
 const RecipeList = () => {
   const recipes = useRecipeStore((state) => state.recipes);
-  const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
-  const searchTerm = useRecipeStore((state) => state.searchTerm);
+  const favorites = useRecipeStore((state) => state.favorites);
+  const toggleFavorite = useRecipeStore((state) => state.toggleFavorite);
 
-  // If there is a search term, use filtered results
-  const displayedRecipes =
-    searchTerm.trim() !== "" ? filteredRecipes : recipes;
+  if (recipes.length === 0) {
+    return <p className="text-gray-500 p-4">No recipes available.</p>;
+  }
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Recipes</h2>
+      <h2 className="text-2xl font-bold mb-4">All Recipes</h2>
 
-      {/* Search Component */}
-      <SearchBar />
+      {recipes.map((recipe) => (
+        <div
+          key={recipe.id}
+          className="border p-4 rounded mb-4 shadow-sm"
+        >
+          <Link to={`/recipe/${recipe.id}`}>
+            <h3 className="text-lg font-semibold">
+              {recipe.title}
+            </h3>
+          </Link>
 
-      {displayedRecipes.length === 0 ? (
-        <p className="text-gray-500">No recipes found.</p>
-      ) : (
-        <ul className="space-y-2">
-          {displayedRecipes.map((recipe) => (
-            <li
-              key={recipe.id}
-              className="border p-3 rounded hover:bg-gray-100"
-            >
-              <Link
-                to={`/recipe/${recipe.id}`}
-                className="font-semibold text-blue-600"
-              >
-                {recipe.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+          <p className="text-gray-600">{recipe.description}</p>
+
+          <button
+            onClick={() => toggleFavorite(recipe.id)}
+            className="mt-2 px-3 py-1 rounded bg-blue-500 text-white"
+          >
+            {favorites.includes(recipe.id)
+              ? "❤️ Remove Favorite"
+              : "🤍 Add to Favorites"}
+          </button>
+        </div>
+      ))}
     </div>
   );
 };
