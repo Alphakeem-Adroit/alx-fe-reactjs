@@ -1,8 +1,8 @@
  // RecipeList component
-  import useRecipeStore from '../store/useRecipeStore.js';
+  import recipeStore from '../store/recipeStore.js';
 
   const RecipeList = () => {
-    const recipes = useRecipeStore(state => state.recipes);
+    const recipes = recipeStore(state => state.recipes);
 
     return (
       <div>
