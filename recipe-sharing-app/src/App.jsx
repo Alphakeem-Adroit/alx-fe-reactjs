@@ -3,31 +3,17 @@ import AddRecipeForm from './components/AddRecipeForm';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RecipeDetails from "./components/RecipeDetails";
 import EditRecipeForm from "./components/EditRecipeForm";
-import DeleteRecipeButton from './components/DeleteRecipeButton';
-
 
 function App() {
   return (
-    <>
-      <RecipeList />
-      <AddRecipeForm />
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<><RecipeList /><AddRecipeForm /></>} />
+        <Route path="/recipe/:id" element={<RecipeDetails />} />
+        <Route path="/edit/:id" element={<EditRecipeForm />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
-
-
-// function App() {
-//   return (
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path="/" element={<RecipeList />} />
-//         <Route path="/recipe/:id" element={<RecipeDetails />} />
-//         <Route path="/edit/:id" element={<EditRecipeForm />} />
-//       </Routes>
-//     </BrowserRouter>
-//   );
-// }
-
-// export default App;
+export default App;
