@@ -29,3 +29,6 @@ export const searchUsers = async ({ username, location, minRepos }) => {
 
   return fullUsers;
 };
+
+
+// "https://api.github.com/search/users?q"
