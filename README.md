@@ -31,8 +31,8 @@ The goal is to build scalable, maintainable, and production-ready React applicat
 
 * **ReactJS**
 * **JavaScript (ES6+)**
-* **Vite / Create React App (depending on module)**
-* **CSS / Tailwind (if applicable)**
+* **Vite**
+* **Tailwind**
 * **Node.js & npm**
 
 ---
@@ -42,13 +42,14 @@ The goal is to build scalable, maintainable, and production-ready React applicat
 ```
 alx-fe-reactjs/
 │
-├── 0x00-react_intro/
-├── 0x01-react_components/
-├── 0x02-react_props/
-├── 0x03-react_state/
-├── 0x04-react_hooks/
-├── 0x05-react_router/
-├── 0x06-api_integration/
+├── alx-react-app-new/
+├── alx-react-app-props/
+├── alx-react-app/
+├── github-user-search/
+├── my-company/
+├── recipe-sharing-app/
+├── tailwind-react-integration/
+├── LICENSE
 │
 └── README.md
 ```
@@ -56,7 +57,6 @@ alx-fe-reactjs/
 Each directory contains:
 
 * Source code
-* Project-specific README (if applicable)
 * Implementation examples
 * Exercises and solutions
 
@@ -92,20 +92,6 @@ If using Vite:
 npm run dev
 ```
 
-If using Create React App:
-
-```bash
-npm start
-```
-
----
-
-### 4️⃣ Build for Production
-
-```bash
-npm run build
-```
-
 ---
 
 ## 📖 Key Learning Concepts
@@ -138,7 +124,7 @@ npm run build
 
 * useEffect
 * useRef
-* Custom hooks (where applicable)
+* Custom hooks
 
 ### 🔹 Routing
 
@@ -167,36 +153,6 @@ npm run build
 
 ---
 
-## 📸 Sample Features Implemented
-
-Depending on the modules included, projects may contain:
-
-* Counter application
-* Dynamic list rendering
-* Form validation
-* Todo application
-* Quote generator
-* API-powered UI
-* Multi-page routing app
-
----
-
-## 🧪 Testing (If Applicable)
-
-If testing tools are included:
-
-```bash
-npm test
-```
-
-Testing may include:
-
-* Component rendering checks
-* Interaction tests
-* Basic unit testing
-
----
-
 ## 📦 Deployment
 
 To deploy:
@@ -219,7 +175,7 @@ npm run build
 ## 👨🏽‍💻 Author
 
 **Alphakeem Adroit**
-Frontend & Full Stack Developer
+Full Stack Developer
 
 GitHub: [@Alphakeem-Adroit](https://github.com/Alphakeem-Adroit)
 
