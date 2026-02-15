@@ -1,25 +1,31 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://api.github.com/users";
-
+const API_BASE_URL = "https://api.github.com";
 const API_KEY = import.meta.env.VITE_GITHUB_API_KEY;
 
-export const fetchUserData = async (username) => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/${username}`, {
-      headers: API_KEY
-        ? { Authorization: `Bearer ${API_KEY}` }
-        : {},
-    });
+const headers = API_KEY ? { Authorization: `Bearer ${API_KEY}` } : {};
 
-    return response.data;
-  } catch (error) {
-    if (error.response) {
-      // GitHub responded with an error (e.g., 404 user not found)
-      throw new Error(error.response.data.message);
-    } else {
-      // Network error
-      throw new Error("Network error. Please try again.");
-    }
-  }
+// Search users
+export const searchUsers = async ({ username, location, minRepos }) => {
+  let query = "";
+  if (username) query += `${username} in:login`;
+  if (location) query += ` location:${location}`;
+  if (minRepos) query += ` repos:>=${minRepos}`;
+
+  const response = await axios.get(
+    `${API_BASE_URL}/search/users?q=${encodeURIComponent(query)}`,
+    { headers }
+  );
+
+  const users = response.data.items;
+
+  // Fetch full info for each user
+  const fullUsers = await Promise.all(
+    users.map(async (u) => {
+      const detail = await axios.get(`${API_BASE_URL}/users/${u.login}`, { headers });
+      return detail.data; // this now includes bio, followers, repos, etc.
+    })
+  );
+
+  return fullUsers;
 };

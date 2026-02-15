@@ -1,88 +1,92 @@
 import { useState } from "react";
-import { fetchUserData } from "../services/githubService";
 
-const Search = () => {
+const Search = ({ onSearch }) => {
   const [username, setUsername] = useState("");
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [location, setLocation] = useState("");
+  const [minRepos, setMinRepos] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!username) return;
-
-    setLoading(true);
-    setError("");
-    setUser(null);
-
-    try {
-      const data = await fetchUserData(username);
-      setUser(data);
-    } catch (err) {
-      setError("Looks like we cant find the user");
-    } finally {
-      setLoading(false);
-    }
+    onSearch({
+      username,
+      location,
+      minRepos,
+    });
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10">
-      <form onSubmit={handleSubmit} className="flex gap-2">
-        <input
-          type="text"
-          placeholder="Enter GitHub username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="flex-1 p-2 border rounded-md"
-        />
+    <div className="w-full max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-2xl">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+        Advanced GitHub User Search
+      </h2>
+
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4"
+      >
+        {/* Username */}
+        <div className="flex flex-col">
+          <label
+            htmlFor="username"
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
+            GitHub Username
+          </label>
+          <input
+            id="username"
+            type="text"
+            placeholder="e.g. torvalds"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+          />
+        </div>
+
+        {/* Location */}
+        <div className="flex flex-col">
+          <label
+            htmlFor="location"
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
+            Location
+          </label>
+          <input
+            id="location"
+            type="text"
+            placeholder="e.g. Nigeria"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+          />
+        </div>
+
+        {/* Minimum Repositories */}
+        <div className="flex flex-col">
+          <label
+            htmlFor="minRepos"
+            className="text-sm font-medium text-gray-700 mb-1"
+          >
+            Minimum Repositories
+          </label>
+          <input
+            id="minRepos"
+            type="number"
+            placeholder="e.g. 10"
+            value={minRepos}
+            onChange={(e) => setMinRepos(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+          />
+        </div>
+
+        {/* Submit Button */}
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded-md"
+          className="mt-4 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition duration-200"
         >
           Search
         </button>
       </form>
-
-      {/* Loading State */}
-      {loading && (
-        <p className="text-blue-500 mt-4">Loading...</p>
-      )}
-
-      {/* Error State */}
-      {error && (
-        <p className="text-red-500 mt-4">{error}</p>
-      )}
-
-      {/* Success State */}
-      {user && (
-        <div className="mt-6 p-6 bg-white shadow-lg rounded-xl text-center">
-          <img
-            src={user.avatar_url}
-            alt={user.login}
-            className="w-24 h-24 rounded-full mx-auto"
-          />
-
-          <h2 className="text-xl font-bold mt-3">
-            {user.name || user.login}
-          </h2>
-
-          {user.bio && (
-            <p className="text-gray-600 mt-2 text-sm">
-              {user.bio}
-            </p>
-          )}
-
-          <a
-            href={user.html_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-4 text-blue-600 hover:underline"
-          >
-            View GitHub Profile →
-          </a>
-        </div>
-      )}
     </div>
   );
 };
