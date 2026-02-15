@@ -1,6 +1,7 @@
 import Search from "./components/Search";
 import { fetchUserData } from "./services/githubService";
 import { useState } from "react";
+import Header from './components/Header';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -24,6 +25,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
+      <Header />
       <Search
         onSearch={handleSearch}
         user={user}
