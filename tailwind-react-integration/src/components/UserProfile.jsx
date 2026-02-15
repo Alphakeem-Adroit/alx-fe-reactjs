@@ -3,10 +3,10 @@ import react from '../assets/react.svg'
 
 function UserProfile() {
   return (
-    <div className="bg-gray-100 p-8 max-w-sm mx-auto my-20 rounded-lg shadow-lg">
+    <div className="bg-gray-100 p-8 sm:p-4 md:p-8 max-w-sm max-w-xs mx-auto my-20 rounded-lg shadow-lg">
       <img src={ react } alt="User" className="rounded-full w-36 h-36 mx-auto" />
-      <h1 className="text-xl text-blue-800 my-4 text-center">John Doe</h1>
-      <p className="text-gray-600 text-base text-center">Developer at Example Co. Loves to write code and explore new technologies.</p>
+      <h1 className="text-xl sm:text-lg md:text-xl text-blue-800 my-4 text-center">John Doe</h1>
+      <p className="text-gray-600 sm:text-sm  md:text-base text-center">Developer at Example Co. Loves to write code and explore new technologies.</p>
     </div>
   );
 }
