@@ -1,83 +1,90 @@
 import { useState } from "react";
+import { fetchUserData } from "../services/githubService";
 
-export default function Search({ onSearch, user, loading, error }) {
+const Search = () => {
   const [username, setUsername] = useState("");
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!username.trim()) return;
 
-    onSearch(username);
-    setUsername("");
+    if (!username) return;
+
+    setLoading(true);
+    setError("");
+    setUser(null);
+
+    try {
+      const data = await fetchUserData(username);
+      setUser(data);
+    } catch (err) {
+      setError("Looks like we cant find the user");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="max-w-md mx-auto mt-10">
-      {/* Search Form */}
-      <form
-        onSubmit={handleSubmit}
-        className="flex items-center gap-2"
-      >
+      <form onSubmit={handleSubmit} className="flex gap-2">
         <input
           type="text"
-          placeholder="Enter GitHub username..."
+          placeholder="Enter GitHub username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 p-2 border rounded-md"
         />
-
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          className="px-4 py-2 bg-blue-600 text-white rounded-md"
         >
           Search
         </button>
       </form>
 
-      {/* Conditional Rendering Section */}
-
+      {/* Loading State */}
       {loading && (
-        <p className="text-center mt-4 text-gray-500">
-          Loading...
-        </p>
+        <p className="text-blue-500 mt-4">Loading...</p>
       )}
 
+      {/* Error State */}
       {error && (
-        <p className="text-center mt-4 text-red-500">
-          {error}
-        </p>
+        <p className="text-red-500 mt-4">{error}</p>
       )}
 
+      {/* Success State */}
       {user && (
         <div className="mt-6 p-6 bg-white shadow-lg rounded-xl text-center">
-            <img
+          <img
             src={user.avatar_url}
             alt={user.login}
-            className="w-24 h-24 rounded-full mx-auto border-4 border-blue-100"
-            />
+            className="w-24 h-24 rounded-full mx-auto"
+          />
 
-            <h2 className="text-xl font-bold mt-3">
+          <h2 className="text-xl font-bold mt-3">
             {user.name || user.login}
-            </h2>
+          </h2>
 
-            {/* Bio */}
-            {user.bio && (
+          {user.bio && (
             <p className="text-gray-600 mt-2 text-sm">
-                {user.bio}
+              {user.bio}
             </p>
-            )}
+          )}
 
-            {/* Profile Link */}
-            <a
+          <a
             href={user.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block mt-4 text-blue-600 font-medium hover:underline"
-            >
+            className="inline-block mt-4 text-blue-600 hover:underline"
+          >
             View GitHub Profile →
-            </a>
+          </a>
         </div>
-    )}
+      )}
     </div>
   );
-}
+};
+
+export default Search;
