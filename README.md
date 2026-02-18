@@ -48,6 +48,7 @@ alx-fe-reactjs/
 ├── github-user-search/
 ├── my-company/
 ├── recipe-sharing-app/
+├── recipe-sharing-platform/
 ├── tailwind-react-integration/
 ├── LICENSE
 │
