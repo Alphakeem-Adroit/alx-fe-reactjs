@@ -10,7 +10,6 @@ const AddRecipeForm = () => {
   const [errors, setErrors] = useState({});
   const [image, setImage] = useState("");
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -151,3 +150,5 @@ const AddRecipeForm = () => {
 };
 
 export default AddRecipeForm;
+
+// validate
