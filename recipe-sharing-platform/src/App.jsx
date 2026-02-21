@@ -2,7 +2,7 @@ import './App.css';
 import HomePage from './components/HomePage';
 import Header from './components/Header';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import RecipeDetail from './components/RecipeDetails';
+import RecipeDetail from './components/RecipeDetail';
 import AddRecipeForm from './components/AddRecipeForm';
 import Footer from './components/Footer';
 
