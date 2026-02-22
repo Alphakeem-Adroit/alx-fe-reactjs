@@ -106,7 +106,7 @@ const Search = () => {
 
         <button
           type="submit"
-          className="mt-4 bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition duration-200"
+          className="mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-gray-800 transition duration-200"
         >
           Search
         </button>
