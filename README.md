@@ -50,6 +50,10 @@ alx-fe-reactjs/
 ├── recipe-sharing-app/
 ├── recipe-sharing-platform/
 ├── tailwind-react-integration/
+├── form-handling-react/
+├── react-query-demo/
+├── react-router-advanced/
+├── react-todo/
 ├── LICENSE
 │
 └── README.md
