@@ -4,7 +4,6 @@ const RegistrationForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
@@ -12,15 +11,22 @@ const RegistrationForm = () => {
 
     let newErrors = {};
 
-    if (!username.trim()) newErrors.username = "Username is required";
-    if (!email.trim()) newErrors.email = "Email is required";
-    if (!password.trim()) newErrors.password = "Password is required";
+    if (!username) {
+      newErrors.username = "Username is required";
+    }
+
+    if (!email) {
+      newErrors.email = "Email is required";
+    }
+
+    if (!password) {
+      newErrors.password = "Password is required";
+    }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
       console.log({ username, email, password });
-      alert("Registration successful!");
       setUsername("");
       setEmail("");
       setPassword("");
