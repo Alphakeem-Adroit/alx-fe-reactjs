@@ -6,5 +6,7 @@
     "Field",
     "ErrorMessage",
     "initialValues",
-    "validationSchema"
+    "validationSchema",
+    "Yup",
+    "string().required"
 ]
