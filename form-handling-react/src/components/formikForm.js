@@ -8,5 +8,7 @@
     "initialValues",
     "validationSchema",
     "Yup",
-    "string().required"
+    "string().required",
+    "Yup.object",
+    "Yup.string"
 ]
